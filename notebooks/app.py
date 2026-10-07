@@ -28,9 +28,13 @@ st.markdown("Plataforma analítica para el rastreo y predicción espacial de bro
 st.markdown("---")
 
 # --- RUTAS DINÁMICAS ---
-directorio_notebooks = os.getcwd()
-directorio_raiz = os.path.dirname(directorio_notebooks)
+# __file__ obtiene la ruta absoluta de este archivo app.py (ej. .../notebooks/app.py)
+ruta_actual = os.path.abspath(__file__)
 
+# Subimos un nivel para llegar a la raíz del proyecto (la carpeta principal)
+directorio_raiz = os.path.dirname(os.path.dirname(ruta_actual))
+
+# Ahora construimos las rutas hacia la carpeta data
 ruta_area = os.path.join(directorio_raiz, 'data', 'processed', 'Datos_Catorcenas_2025.csv') 
 ruta_combo = os.path.join(directorio_raiz, 'data', 'processed', 'Datos_Clima_Mensual.csv') 
 ruta_mapa = os.path.join(directorio_raiz, 'data', 'processed', 'Datos_Mapa_Burbujas.csv') 
