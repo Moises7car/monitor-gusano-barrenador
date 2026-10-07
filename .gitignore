@@ -1,0 +1,8 @@
+# Entornos y temporales
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+.env
+
+.DS_Store
+# data/raw/*.tif
