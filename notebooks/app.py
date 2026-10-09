@@ -14,13 +14,6 @@ from streamlit_folium import st_folium
 # --- 1. CONFIGURACIÓN DE LA PÁGINA ---
 st.set_page_config(page_title="Monitor GBG", page_icon="🪰", layout="wide", initial_sidebar_state="expanded")
 
-st.markdown("""
-    <style>
-        .reportview-container { background-color: #FAFAFA; }
-        .sidebar .sidebar-content { background-color: #2C3E50; color: white; }
-    </style>
-""", unsafe_allow_html=True)
-
 # --- RUTAS DINÁMICAS ---
 ruta_actual = os.path.abspath(__file__)
 directorio_raiz = os.path.dirname(os.path.dirname(ruta_actual))
@@ -33,7 +26,8 @@ ruta_completa = os.path.join(directorio_raiz, 'data', 'processed', 'Dataset_GB_M
 
 # --- 2. MENÚ LATERAL DE NAVEGACIÓN ---
 with st.sidebar:
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Cochliomyia_hominivorax.jpg/300px-Cochliomyia_hominivorax.jpg", use_column_width=True) 
+    # URL directa de alta resolución y más estable
+    st.image("https://upload.wikimedia.org/wikipedia/commons/8/89/Cochliomyia_hominivorax.jpg", use_column_width=True) 
     st.title("Navegación")
     opcion = st.radio(
         "Selecciona un módulo:",
@@ -45,9 +39,6 @@ with st.sidebar:
 
 # --- 3. CONTENIDO DE LAS PÁGINAS ---
 
-# ==========================================
-# PÁGINA 1: PANORAMA GENERAL
-# ==========================================
 if opcion == "📖 Panorama General":
     st.title("🪰 Monitor Epidemiológico: Gusano Barrenador del Ganado")
     st.markdown("Plataforma analítica para el rastreo y predicción espacial de brotes en México y Centroamérica.")
@@ -78,9 +69,6 @@ if opcion == "📖 Panorama General":
     Al aparearse con las hembras salvajes, estas no dejan descendencia, colapsando la población natural del parásito y reduciendo drásticamente el riesgo de expansión masiva.
     """)
 
-# ==========================================
-# PÁGINA 2: ANÁLISIS EPIDEMIOLÓGICO
-# ==========================================
 elif opcion == "📊 Análisis Epidemiológico":
     st.title("📊 Análisis Epidemiológico e Influencia Climática")
     st.markdown("---")
@@ -90,12 +78,12 @@ elif opcion == "📊 Análisis Epidemiológico":
         df_area = pd.read_csv(ruta_area)
         fig_area = px.area(df_area, x=df_area.columns[0], y=df_area.columns[1], color_discrete_sequence=['#B38481'])
         fig_area.update_traces(mode='lines+markers', marker=dict(color='#6B1C23'))
-        fig_area.update_layout(margin=dict(l=0, r=0, t=30, b=0), height=350)
+        fig_area.update_layout(margin=dict(l=0, r=0, t=30, b=0), height=350, paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
         
         esp_izq, col_c, esp_der = st.columns([1, 4, 1])
         with col_c:
             st.plotly_chart(fig_area, use_container_width=True)
-            st.info("💡 **Interpretación:** Esta curva muestra los picos estacionales de los brotes en lapsos de catorce días (tiempo aproximado del gusano en el animal infectado). Permite identificar los meses donde la tasa de reproducción del parásito se acelera exponencialmente. ")
+            st.info("💡 **Interpretación:** Esta curva muestra los picos estacionales de los brotes en lapsos de catorce días (tiempo aproximado del peligro en el animal infectado). Permite identificar los meses donde la tasa de reproducción del parásito se acelera exponencialmente.")
     except: st.warning("No se pudo cargar la gráfica de áreas.")
 
     st.markdown("<br>", unsafe_allow_html=True)
@@ -108,7 +96,7 @@ elif opcion == "📊 Análisis Epidemiológico":
         fig_combo.add_trace(go.Bar(x=df_combo[col_mes], y=df_combo[col_casos], name='Casos', marker_color='#A33A36'), secondary_y=False)
         fig_combo.add_trace(go.Scatter(x=df_combo[col_mes], y=df_combo[col_temp], name='Temp (°C)', line=dict(color='black', width=3)), secondary_y=True)
         fig_combo.add_trace(go.Scatter(x=df_combo[col_mes], y=df_combo[col_lluvia], name='Lluvia (mm)', line=dict(color='#E56B3A', width=3)), secondary_y=True)
-        fig_combo.update_layout(margin=dict(l=0, r=0, t=10, b=0), height=400, legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1))
+        fig_combo.update_layout(margin=dict(l=0, r=0, t=10, b=0), height=400, legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1), paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
         
         esp_izq, col_c, esp_der = st.columns([1, 4, 1])
         with col_c:
@@ -128,7 +116,7 @@ elif opcion == "📊 Análisis Epidemiológico":
         df_3d = df_completo.groupby(['Temp_Round', 'Lluvia_Round', 'Mes']).size().reset_index(name='Concentracion')
         
         fig_3d = px.scatter_3d(df_3d, x='Temp_Round', y='Lluvia_Round', z='Mes', color='Concentracion', size='Concentracion', color_continuous_scale='YlOrRd', opacity=0.9)
-        fig_3d.update_layout(margin=dict(l=0, r=0, b=0, t=0), height=500, scene=dict(xaxis_title='Temp (°C)', yaxis_title='Lluvia (mm)', zaxis_title='Mes'))
+        fig_3d.update_layout(margin=dict(l=0, r=0, b=0, t=0), height=500, scene=dict(xaxis_title='Temp (°C)', yaxis_title='Lluvia (mm)', zaxis_title='Mes'), paper_bgcolor="rgba(0,0,0,0)")
         
         esp_izq, col_c, esp_der = st.columns([1, 4, 1])
         with col_c: 
@@ -136,9 +124,6 @@ elif opcion == "📊 Análisis Epidemiológico":
             st.info("💡 **Interpretación:** Esta gráfica tridimensional materializa el 'Nicho Ecológico Fundamental'. Las esferas más grandes y oscuras representan el rango térmico y pluviométrico exacto donde la plaga encuentra las condiciones biológicas perfectas para detonar brotes masivos.")
     except: st.warning("No se pudo cargar el gráfico 3D.")
 
-# ==========================================
-# PÁGINA 3: INTELIGENCIA GEOESPACIAL
-# ==========================================
 elif opcion == "🌍 Inteligencia Geoespacial":
     st.title("🌍 Inteligencia Geoespacial")
     st.markdown("---")
@@ -172,6 +157,10 @@ elif opcion == "🌍 Inteligencia Geoespacial":
             matriz_riesgo = src.read(1)
             matriz_riesgo = np.where(matriz_riesgo == src.nodata, np.nan, matriz_riesgo)
             fig, ax = plt.subplots(figsize=(10, 6))
+            
+            # Cambiamos el fondo de la figura para que coincida con la página
+            fig.patch.set_facecolor('#F4F6F9') 
+            
             im = ax.imshow(matriz_riesgo, cmap='YlOrRd', vmin=0, vmax=1)
             ax.axis('off')
             cbar = plt.colorbar(im, ax=ax, fraction=0.036, pad=0.04)
@@ -183,9 +172,6 @@ elif opcion == "🌍 Inteligencia Geoespacial":
                 st.info("💡 **Interpretación:** A diferencia del mapa superior (pasado), este tensor evalúa el riesgo a futuro. Las zonas en rojo oscuro poseen el clima perfecto para la supervivencia endémica, indicando dónde deben enfocarse las barreras de insectos estériles antes de que la plaga llegue.")
     except: st.info("Cargando proyección raster...")
 
-# ==========================================
-# PÁGINA 4: METODOLOGÍA Y SIMULADOR
-# ==========================================
 elif opcion == "⚙️ Metodología y Simulador":
     st.title("⚙️ Arquitectura del Modelo y Simulador")
     st.markdown("---")
@@ -197,8 +183,7 @@ elif opcion == "⚙️ Metodología y Simulador":
         st.write("""
         Para entrenar el modelo predictivo de Nicho Ecológico, se tomaron dos decisiones estadísticas fundamentales:
         
-        1. **Uso de las Variables Climática:** Se comprimieron dos años de registros climáticos (2024-2025) utilizando la mediana de la temperatura en lugar del promedio. Esto elimina el ruido de anomalías estocásticas (olas de calor o tormentas atípicas de pocos días) y revela la verdadera "firma climática base" de la región. Asimismo se hizo uso de la Precipitación Acumulada Anual, esto distingue mejor la variable en cada zona.  
-
+        1. **Uso de la Mediana Climática:** Se comprimieron dos años de registros climáticos utilizando la mediana en lugar del promedio. Esto elimina el ruido de anomalías estocásticas (olas de calor o tormentas atípicas de pocos días) y revela la verdadera "firma climática base" de la región.
         2. **Generación de Pseudo-ausencias:** Al solo contar con registros de infecciones positivas, se utilizó un muestreo espacial de pseudo-ausencias. Esto le permite al algoritmo XGBoost aprender el contraste entre un clima ideal (presencia) y un clima hostil, logrando una clasificación de riesgo robusta (AUC > 0.92).
         """)
         

@@ -1,0 +1,15 @@
+[theme]
+# Color principal (Botones, barras de carga, sliders) 
+primaryColor = "#A33A36"
+
+# Color de fondo de la página principal (Gris)
+backgroundColor = "#F4F6F9"
+
+# Color de fondo del menú lateral (Azul nocturno/Gris oscuro)
+secondaryBackgroundColor = "#1E2A38"
+
+# Color del texto principal
+textColor = "#2C3E50"
+
+# Tipografía 
+font = "sans serif"
