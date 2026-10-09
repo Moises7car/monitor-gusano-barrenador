@@ -62,8 +62,8 @@ if opcion == "📖 Panorama General":
             Al eclosionar, las larvas se alimentan del tejido vivo, causando miasis severa y la muerte del huésped.
             Tras décadas de erradicación, la plaga ha reingresado a Centroamérica, amenazando la industria ganadera y la salud pública en México, alcanzando grandes infecciones en el año 2025.
 
-	La mosca puede volar grandes distancias cuando el clima es favorable buscando dónde poner sus huevos, además, es sensible al frío, el clima es el factor más importante para analizar la supervivencia del animal.
-	Tras el aumento de casos en México desde 2024, en Mayo del 2025 Estados Unidos (E.E.U.U) anunció la suspensión total e inmediata de entrada de ganado vivo. Las exportaciones de ganado para México cayeron causando pérdidas económicas importantes para el país.
+            La mosca puede volar grandes distancias cuando el clima es favorable buscando dónde poner sus huevos, además, es sensible al frío, el clima es el factor más importante para analizar la supervivencia del animal.
+            Tras el aumento de casos en México desde 2024, en Mayo del 2025 Estados Unidos (E.E.U.U) anunció la suspensión total e inmediata de entrada de ganado vivo. Las exportaciones de ganado para México cayeron causando pérdidas económicas importantes para el país.
             """)
         with col2:
             st.info("**Datos Clave:**\n\n"
@@ -89,7 +89,7 @@ elif opcion == "📊 Análisis Epidemiológico":
             fig_area.update_traces(mode='lines+markers', marker=dict(color='#6B1C23'))
             fig_area.update_layout(margin=dict(l=0, r=0, t=30, b=0), height=350, paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
             st.plotly_chart(fig_area, use_container_width=True)
-            st.info("💡 **Interpretación:** Picos estacionales de brotes en lapsos de catorce días (tiempo aproximado del peligro en el animal infectado. Permite identificar los meses donde la tasa de reproducción del parásito se acelera exponencialmente.")
+            st.info("💡 **Interpretación:** Picos estacionales de brotes en lapsos de catorce días (tiempo aproximado del peligro en el animal infectado). Permite identificar los meses donde la tasa de reproducción del parásito se acelera exponencialmente.")
         except: st.warning("No se pudo cargar la gráfica de áreas.")
 
     with st.container(border=True):
@@ -120,7 +120,7 @@ elif opcion == "📊 Análisis Epidemiológico":
             fig_3d = px.scatter_3d(df_3d, x='Temp_Round', y='Lluvia_Round', z='Mes', color='Concentracion', size='Concentracion', color_continuous_scale='YlOrRd', opacity=0.9)
             fig_3d.update_layout(margin=dict(l=0, r=0, b=0, t=0), height=500, scene=dict(xaxis_title='Temp (°C)', yaxis_title='Lluvia (mm)', zaxis_title='Mes'), paper_bgcolor="rgba(0,0,0,0)")
             st.plotly_chart(fig_3d, use_container_width=True)
-	    st.info("💡 **Interpretación:** Esta gráfica tridimensional materializa el 'Nicho Ecológico Fundamental'. Las esferas más grandes y oscuras representan el rango térmico y pluviométrico exacto donde la plaga encuentra las condiciones biológicas perfectas para detonar brotes masivos.")
+            st.info("💡 **Interpretación:** Esta gráfica tridimensional materializa el 'Nicho Ecológico Fundamental'. Las esferas más grandes y oscuras representan el rango térmico y pluviométrico exacto donde la plaga encuentra las condiciones biológicas perfectas para detonar brotes masivos.")
         except: st.warning("No se pudo cargar el gráfico 3D.")
 
 elif opcion == "🌍 Inteligencia Geoespacial":
@@ -142,13 +142,12 @@ elif opcion == "🌍 Inteligencia Geoespacial":
                 folium.CircleMarker(location=[lat, lon], radius=6, color='#6B1C23', fill=True, fill_color='#A33A36', fill_opacity=0.7, popup=texto_info).add_to(marcador_cluster)
 
             st_folium(m, width="100%", height=500, returned_objects=[])
-            st.info(💡 **Interpretación:** Este mapa muestra los clústeres históricos de infección. Las burbujas indican zonas que ya sufrieron epidemias severas, marcando visualmente los corredores geográficos por donde avanza el parásito.")
-    except: st.error("Error cargando el mapa de agrupamientos.")
+            st.info("💡 **Interpretación:** Este mapa muestra los clústeres históricos de infección. Las burbujas indican zonas que ya sufrieron epidemias severas, marcando visualmente los corredores geográficos por donde avanza el parásito.")
         except: st.error("Error cargando el mapa de agrupamientos.")
 
     with st.container(border=True):
         st.subheader("Proyección Espacial de Riesgo (XGBoost 2026)")
-        st.write("Idondeidad climática proyectada por nuestro modelo de Machine Learning.")
+        st.write("Idoneidad climática proyectada por nuestro modelo de Machine Learning.")
         try:
             with rasterio.open(ruta_raster) as src:
                 matriz_riesgo = src.read(1)
@@ -172,11 +171,10 @@ elif opcion == "⚙️ Metodología y Simulador":
         with col_text:
             st.subheader("Ingeniería de Características")
             st.write("""
-
             Para entrenar el modelo predictivo, se tomaron dos decisiones estadísticas importantes:
 
-            **1. Uso de la Mediana/Suma Climática:** Se comprimieron dos años de registros climáticos utilizando la mediana de la Temperaura en lugar del promedio. Esto elimina el ruido de anomalías estocásticas (olas de calor o tormentas atípicas de pocos días) y revela la verdadera "firma climática base" de la región.
-Se ha utilizado la Precipitación Acumulada Anual, esto permite distinguir mejor la variable en cada zona. 
+            **1. Uso de la Mediana/Suma Climática:** Se comprimieron dos años de registros climáticos utilizando la mediana de la Temperatura en lugar del promedio. Esto elimina el ruido de anomalías estocásticas (olas de calor o tormentas atípicas de pocos días) y revela la verdadera "firma climática base" de la región.
+            Se ha utilizado la Precipitación Acumulada Anual, esto permite distinguir mejor la variable en cada zona. 
             
             **2. Generación de Pseudo-ausencias:** Al solo contar con registros de infecciones positivas, se utilizó un muestreo espacial de pseudo-ausencias. Esto le permite al algoritmo XGBoost aprender el contraste entre un clima ideal (presencia) y un clima hostil, logrando una clasificación de riesgo robusta (AUC > 0.92).
             """)
