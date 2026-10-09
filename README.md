@@ -12,7 +12,7 @@ Sistema de inteligencia geoespacial y epidemiológica para proyectar el riesgo d
 ## 📁 Estructura del Repositorio
 *   `/data/` - Matrices CSV, Rusters (.tif) y datos climáticos procesados.
 *   `/notebooks/` - Jupyter Notebooks con el pipeline de limpieza, EDA y entrenamiento espacial, junto con la aplicación principal `app.py`.
-*   `/src/` - Scripts de soporte y módulos auxiliares.
+*   `/dashboards/` - Informe descriptivo en Power Bi.
 
 ## 🚀 Ejecución Local
 Para visualizar el Monitor Epidemiológico en tu máquina local:
