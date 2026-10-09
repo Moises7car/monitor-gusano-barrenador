@@ -20,5 +20,8 @@ Para visualizar el Monitor Epidemiológico en tu máquina local:
 2. Instala las dependencias: `pip install -r notebooks/requirements.txt`
 3. Inicia el servidor: `streamlit run notebooks/app.py`
 
+## Página web
+* link: https://monitor-gusano-barrenador-e8qfvbmcyzjzmizjtppbvd.streamlit.app/
 ---
+
 *Desarrollado por Moises Segura Carrillo - Facultad de Ciencias Físico-Matemáticas (BUAP).*
