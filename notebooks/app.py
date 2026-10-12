@@ -337,7 +337,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==============================================================================
-# 3. RUTAS DINÁMICAS (REGLA ESTRICTA: PRESERVADAS EXACTAMENTE)
+# 3. RUTAS DINÁMICAS
 # ==============================================================================
 ruta_actual = os.path.abspath(__file__)
 directorio_raiz = os.path.dirname(os.path.dirname(ruta_actual))
@@ -347,8 +347,6 @@ ruta_combo = os.path.join(directorio_raiz, 'data', 'processed', 'Datos_Clima_Men
 ruta_mapa = os.path.join(directorio_raiz, 'data', 'processed', 'Datos_Mapa_Burbujas.csv') 
 ruta_raster = os.path.join(directorio_raiz, 'data', 'processed', 'Mapa_Riesgo_Barrenador_2026.tif')
 ruta_completa = os.path.join(directorio_raiz, 'data', 'processed', 'Dataset_GB_Mediana_Final.csv')
-
-# Ruta para la imagen local
 ruta_imagen = os.path.join(directorio_raiz, 'data', 'gusano.jpg')
 
 # ==============================================================================
@@ -376,7 +374,6 @@ with st.sidebar:
     
     st.markdown("---")
     
-    # Tarjeta de Estado Operativo en Sidebar
     st.markdown("""
     <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 12px 14px; margin-bottom: 14px;">
         <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -392,16 +389,30 @@ with st.sidebar:
     st.markdown("<p style='font-size: 0.78rem; font-weight: 700; color: #1E293B; margin-bottom: 2px;'>Moises Segura Carrillo</p>", unsafe_allow_html=True)
     st.caption("Facultad de Ciencias Físico-Matemáticas, BUAP")
 
+    # AVISO LEGAL Y ATRIBUCIONES
+    st.markdown("---")
+    st.markdown("""
+    <div style="font-size: 0.65rem; color: #64748B; line-height: 1.4; text-align: justify;">
+        <b>AVISO LEGAL Y ATRIBUCIONES:</b><br>
+        Este es un proyecto académico y de portafolio de Ciencia de Datos sin fines de lucro. <b>No es una herramienta oficial</b> gubernamental ni institucional.<br><br>
+        • <b>Datos Epidemiológicos:</b> Registros públicos de sanidad animal.<br>
+        • <b>Datos Climáticos:</b> Reanálisis satelital (Copernicus/ERA5).<br>
+        • <b>Fotografía:</b> Wikimedia Commons (CC BY-SA).<br>
+        • <b>Software:</b> Desarrollado con tecnologías Open Source.
+    </div>
+    """, unsafe_allow_html=True)
+
+
 # ==============================================================================
 # 5. CONTENIDO DE LAS PÁGINAS CON DISEÑO EJECUTIVO
 # ==============================================================================
 
-# BANNER SUPERIOR INSTITUCIONAL COMÚN
+# BANNER SUPERIOR (Título modificado)
 st.markdown("""
 <div class="executive-topbar">
     <div>
         <div style="font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: #94A3B8; font-weight: 600;">
-            SISTEMA NACIONAL DE VIGILANCIA EPIDEMIOLÓGICA ZOOSANITARIA
+            VIGILANCIA DEL GUSANO BARRENADOR
         </div>
         <div style="font-size: 1.15rem; font-weight: 800; color: #FFFFFF; letter-spacing: -0.01em; margin-top: 2px;">
             Monitor de Inteligencia Bioclimática: Gusano Barrenador del Ganado (GBG)
@@ -414,13 +425,11 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-
 # ------------------------------------------------------------------------------
 # MÓDULO 1: PANORAMA GENERAL
 # ------------------------------------------------------------------------------
 if opcion == "📖 Panorama General":
     
-    # Fila de Métricas Clave (LIMPIAS DE DATOS INVENTADOS)
     m1, m2, m3 = st.columns(3)
     with m1:
         st.metric(
@@ -446,7 +455,6 @@ if opcion == "📖 Panorama General":
 
     st.markdown("<div style='height: 12px;'></div>", unsafe_allow_html=True)
 
-    # Sistema de Pestañas
     tab_resumen, tab_tie, tab_impacto = st.tabs([
         "📋 Diagnóstico y Biología del Parásito",
         "🛡️ Estrategia de Contención",
@@ -525,13 +533,11 @@ if opcion == "📖 Panorama General":
                 </div>
                 """, unsafe_allow_html=True)
 
-
 # ------------------------------------------------------------------------------
 # MÓDULO 2: ANÁLISIS EPIDEMIOLÓGICO
 # ------------------------------------------------------------------------------
 elif opcion == "📊 Análisis Epidemiológico":
     
-    # Tarjetas Métricas del Módulo (Corregidas y Explicadas)
     kpi1, kpi2, kpi3 = st.columns(3)
     with kpi1:
         st.metric(
@@ -557,7 +563,6 @@ elif opcion == "📊 Análisis Epidemiológico":
 
     st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
-    # Pestañas Analíticas para organizar los gráficos
     tab_area, tab_clima, tab_3d = st.tabs([
         "📈 Dinámica Temporal de la Infección",
         "🌦️ Correlación Clima-Infección",
@@ -680,7 +685,6 @@ elif opcion == "📊 Análisis Epidemiológico":
 # ------------------------------------------------------------------------------
 elif opcion == "🌍 Inteligencia Geoespacial":
     
-    # Fila de Métricas Territoriales
     g1, g2, g3 = st.columns(3)
     with g1:
         st.metric(
@@ -706,7 +710,6 @@ elif opcion == "🌍 Inteligencia Geoespacial":
 
     st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
-    # Pestañas Geoespaciales
     tab_folium, tab_raster = st.tabs([
         "📍 Histórico: Agrupamiento Espacial de Brotes (Clustering Folium)",
         "🛰️ Proyección Espacial de Riesgo Futuro (XGBoost 2026)"
@@ -816,7 +819,7 @@ elif opcion == "⚙️ Metodología y Simulador":
             </div>
             """, unsafe_allow_html=True)
             
-            # Controles deslizantes (PRESERVANDO EXACTAMENTE LOS NOMBRES ORIGINALES)
+            # Controles deslizantes
             temp_input = st.slider("Temperatura Promedio (°C)", min_value=10.0, max_value=40.0, value=25.0, step=0.5)
             lluvia_input = st.slider("Precipitación Acumulada Anual (mm)", min_value=0.0, max_value=300.0, value=120.0, step=5.0)
             
@@ -846,7 +849,7 @@ elif opcion == "⚙️ Metodología y Simulador":
             </div>
             """, unsafe_allow_html=True)
             
-            # EVALUACIÓN DE CONDICIONES (LÓGICA ORIGINAL)
+            # EVALUACIÓN DE CONDICIONES
             if 20 <= temp_input <= 30 and lluvia_input >= 50:
                 st.markdown("""
                 <div class="hazard-banner-high">
