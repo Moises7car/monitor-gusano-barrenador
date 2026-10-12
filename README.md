@@ -12,7 +12,7 @@ Sistema de inteligencia geoespacial y epidemiológica para proyectar el riesgo d
 ## 📁 Estructura del Repositorio
 *   `/data/` - Matrices CSV, Rusters (.tif) y datos climáticos procesados.
 *   `/notebooks/` - Jupyter Notebooks con el pipeline de limpieza, EDA y entrenamiento espacial, junto con la aplicación principal `app.py`.
-*   `/src/` - Scripts de soporte y módulos auxiliares.
+*   `/dashboards/` - Informe descriptivo en Power Bi.
 
 ## 🚀 Ejecución Local
 Para visualizar el Monitor Epidemiológico en tu máquina local:
@@ -20,5 +20,8 @@ Para visualizar el Monitor Epidemiológico en tu máquina local:
 2. Instala las dependencias: `pip install -r notebooks/requirements.txt`
 3. Inicia el servidor: `streamlit run notebooks/app.py`
 
+## Página web
+* link: https://monitor-gusano-barrenador-e8qfvbmcyzjzmizjtppbvd.streamlit.app/
 ---
+
 *Desarrollado por Moises Segura Carrillo - Facultad de Ciencias Físico-Matemáticas (BUAP).*
