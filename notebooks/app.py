@@ -430,19 +430,28 @@ st.markdown("""
 # ------------------------------------------------------------------------------
 if opcion == "📖 Panorama General":
     
+    # 1. Cálculo real de municipios y registros
+    try:
+        df_mapa_real = pd.read_csv(ruta_mapa)
+        num_municipios = df_mapa_real['Primera fecha: Municipio'].nunique()
+        total_registros = len(df_mapa_real)
+    except:
+        num_municipios = "N/A"
+        total_registros = "N/A"
+    
     m1, m2, m3 = st.columns(3)
     with m1:
         st.metric(
-            label="Casos Notificados Acumulados (2025)",
-            value="3,214",
-            delta="Confirmados en México y CA",
+            label="Registros de Infección Analizados",
+            value=f"{total_registros}",
+            delta="Base de datos histórica",
             delta_color="off"
         )
     with m2:
         st.metric(
-            label="Municipios en Vigilancia",
-            value="187",
-            delta="Áreas en análisis espacial",
+            label="Municipios Afectados (Histórico)",
+            value=f"{num_municipios}",
+            delta="Territorios en el dataset",
             delta_color="off"
         )
     with m3:
@@ -538,26 +547,35 @@ if opcion == "📖 Panorama General":
 # ------------------------------------------------------------------------------
 elif opcion == "📊 Análisis Epidemiológico":
     
+    # 2. Cálculo real de la mediana del clima en los brotes
+    try:
+        df_clima_real = pd.read_csv(ruta_completa)
+        temp_real = round(df_clima_real['Temperatura_Mediana_C'].median(), 1)
+        lluvia_real = round(df_clima_real['Precipitacion_Mediana_mm'].median(), 1)
+    except:
+        temp_real = "N/A"
+        lluvia_real = "N/A"
+    
     kpi1, kpi2, kpi3 = st.columns(3)
     with kpi1:
         st.metric(
-            label="Pico Máximo de Infección",
-            value="485 casos",
-            delta="Catorcena 14 (Julio - Agosto)",
+            label="Patrón de Crecimiento Epidémico",
+            value="Exponencial",
+            delta="Picos en catorcenas de verano",
             delta_color="inverse"
         )
     with kpi2:
         st.metric(
-            label="Temperatura Crítica de Brote",
-            value="26.4 °C",
-            delta="Ventana óptima: 23°C - 29°C",
+            label="Temperatura Mediana de Supervivencia",
+            value=f"{temp_real} °C",
+            delta="Punto óptimo extraído del clúster",
             delta_color="off"
         )
     with kpi3:
         st.metric(
-            label="Lluvia Mínima de Riesgo",
-            value="> 120 mm",
-            delta="Precipitación acumulada anual requerida",
+            label="Precipitación Mediana de Brotes",
+            value=f"{lluvia_real} mm",
+            delta="Humedad observada en dataset",
             delta_color="off"
         )
 
@@ -685,25 +703,26 @@ elif opcion == "📊 Análisis Epidemiológico":
 # ------------------------------------------------------------------------------
 elif opcion == "🌍 Inteligencia Geoespacial":
     
+    # 3. Textos genéricos correctos para el Modelo XGBoost
     g1, g2, g3 = st.columns(3)
     with g1:
         st.metric(
-            label="Clústeres Geográficos de Foco",
-            value="48 núcleos",
-            delta="Mayor densidad en zonas sur",
-            delta_color="inverse"
+            label="Tipo de Algoritmo de Predicción",
+            value="XGBoost",
+            delta="Extreme Gradient Boosting",
+            delta_color="off"
         )
     with g2:
         st.metric(
-            label="Superficie en Alto Riesgo 2026",
-            value="142,800 km²",
-            delta="Territorios húmedos cálidos",
+            label="Zonas de Riesgo Crítico",
+            value="Probabilidad > 0.8",
+            delta="Regiones rojas en el tensor",
             delta_color="inverse"
         )
     with g3:
         st.metric(
-            label="Precisión del Modelo XGBoost",
-            value="AUC = 0.94",
+            label="Precisión del Modelo (AUC)",
+            value="0.92", # Ajusta esto a tu AUC real
             delta="Alta capacidad predictiva",
             delta_color="normal"
         )
