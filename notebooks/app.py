@@ -345,7 +345,7 @@ directorio_raiz = os.path.dirname(os.path.dirname(ruta_actual))
 ruta_area = os.path.join(directorio_raiz, 'data', 'processed', 'Datos_Catorcenas_2025.csv') 
 ruta_combo = os.path.join(directorio_raiz, 'data', 'processed', 'Datos_Clima_Mensual.csv') 
 ruta_mapa = os.path.join(directorio_raiz, 'data', 'processed', 'Datos_Mapa_Burbujas.csv') 
-ruta_raster = os.path.join(directorio_raiz, 'data', 'processed', 'Mapa_Riesgo_Barrenador_2026.tif')
+ruta_raster = os.path.join(directorio_raiz, 'data', 'processed', 'Mapa2_Riesgo_Barrenador_2026.tif')
 ruta_completa = os.path.join(directorio_raiz, 'data', 'processed', 'Dataset_GB_Mediana_Final.csv')
 ruta_imagen = os.path.join(directorio_raiz, 'data', 'gusano.jpg')
 
@@ -444,14 +444,14 @@ if opcion == "📖 Panorama General":
         st.metric(
             label="Registros de Infección Analizados",
             value=f"{total_registros}",
-            delta="Base de datos histórica",
+            delta="Base de datos",
             delta_color="off"
         )
     with m2:
         st.metric(
             label="Municipios Afectados (Histórico)",
             value=f"{num_municipios}",
-            delta="Territorios en el dataset",
+            delta="Territorios infectados",
             delta_color="off"
         )
     with m3:
@@ -568,7 +568,7 @@ elif opcion == "📊 Análisis Epidemiológico":
         st.metric(
             label="Temperatura Mediana de Supervivencia",
             value=f"{temp_real} °C",
-            delta="Punto óptimo extraído del clúster",
+            delta="Punto óptimo",
             delta_color="off"
         )
     with kpi3:
@@ -722,7 +722,7 @@ elif opcion == "🌍 Inteligencia Geoespacial":
     with g3:
         st.metric(
             label="Precisión del Modelo (AUC)",
-            value="0.92", # Ajusta esto a tu AUC real
+            value="0.923", 
             delta="Alta capacidad predictiva",
             delta_color="normal"
         )
